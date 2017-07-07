@@ -2,7 +2,6 @@
 #define NORMALIZE_H_GUARD
 
 #include "scs.h"
-#include "unit_test_util.h"
 
 
 #define MIN_SCALE (1e-3)

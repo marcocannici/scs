@@ -84,11 +84,71 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">Logging </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>Coming soon... </p>
-</div></div><!-- contents -->
+<div class="textblock"><h1><a class="anchor" id="logging_in_c"></a>
+Logging in C</h1>
+<p>In SuperSCS, we may activate the logging of progress information using the property <code>do_record_progress</code> in <a class="el" href="struct_s_c_s___s_e_t_t_i_n_g_s.html">Settings</a>.</p>
+<p>In that case, the <a class="el" href="struct_s_c_s___i_n_f_o.html">Info</a> object that is updated using <a class="el" href="scs_8h.html#a103f47be236f81ae085244d574997706">scs</a> contains the following information:</p>
+<ul>
+<li><code>progress_iter</code> an array of the iterations when the progress data were recorded. It is possible that progress data are stored with a stride.</li>
+<li><code>progress_time</code> an array of timestamps (starting at <code>0</code>) when the progress data were recorded</li>
+<li><code>progress_norm_fpr</code> the values of the fixed-point residual at every iteration.</li>
+<li><code>progress_respri</code> the recoded primal residuals</li>
+<li><code>progress_resdual</code> the recorded dual residuals</li>
+<li><code>progress_relgap</code> an array of the recoded values of the relative gap</li>
+<li><code>progress_pcost</code> an array of the recoded values of the primal cost</li>
+<li><code>progress_dcost</code> an array of the recoded values of the dual cost</li>
+<li><code>progress_ls</code> the number of line-search iterations at each iteration of the algorithm</li>
+<li><code>progress_mode</code> the type of step that was taken at every iteration; <code>-1</code> corresponds to a nominal step, <code>0</code> is for a K0 step and <code>1</code> and <code>2</code> are for K1 and K2 steps respectively.</li>
+</ul>
+<p>Note that the above arrays have length equal to the number of iterations.</p>
+<p>Example:</p>
+<div class="fragment"><div class="line"><a class="code" href="glbopts_8h.html#a23c48a83ce0c58783595ad45ffcaf76b">scs_int</a> i;</div>
+<div class="line"><span class="keyword">const</span> <a class="code" href="glbopts_8h.html#a23c48a83ce0c58783595ad45ffcaf76b">scs_int</a> column_size = 10;</div>
+<div class="line">printf(<span class="stringliteral">&quot;  i     P Cost    D Cost       Gap       FPR      PRes      DRes\n&quot;</span>);</div>
+<div class="line">printf(<span class="stringliteral">&quot;----------------------------------------------------------------\n&quot;</span>);</div>
+<div class="line"><span class="keywordflow">for</span> (i = 0; i &lt; info-&gt;iter; ++i) {</div>
+<div class="line">      printf(<span class="stringliteral">&quot;%*i &quot;</span>, 3, info-&gt;progress_iter[i]);</div>
+<div class="line">      printf(<span class="stringliteral">&quot;%*.2e&quot;</span>, column_size, info-&gt;progress_pcost[i]);</div>
+<div class="line">      printf(<span class="stringliteral">&quot;%*.2e&quot;</span>, column_size, info-&gt;progress_dcost[i]);</div>
+<div class="line">      printf(<span class="stringliteral">&quot;%*.2e&quot;</span>, column_size, info-&gt;progress_relgap[i]);</div>
+<div class="line">      printf(<span class="stringliteral">&quot;%*.2e&quot;</span>, column_size, info-&gt;progress_norm_fpr[i]);</div>
+<div class="line">      printf(<span class="stringliteral">&quot;%*.2e&quot;</span>, column_size, info-&gt;progress_respri[i]);</div>
+<div class="line">      printf(<span class="stringliteral">&quot;%*.2e&quot;</span>, column_size, info-&gt;progress_resdual[i]);</div>
+<div class="line">      printf(<span class="stringliteral">&quot;\n&quot;</span>);</div>
+<div class="line">}</div>
+</div><!-- fragment --><h1><a class="anchor" id="logging_in_matlab"></a>
+Logging in MATLAB</h1>
+<p>Similarly, we may record progress information in MATLAB when we call <code>scs_direct.m</code>, <code>scs_indirect.m</code> or <code>scs.m</code>.</p>
+<p>All we have to do is to set <code>do_record_progress</code> to <code>1</code>.</p>
+<div class="fragment"><div class="line">params.do_record_progress = 1; </div>
+<div class="line">[x, y, s, info] = scs_direct(data, K, params);</div>
+</div><!-- fragment --><p>This is the <code>info</code> structure we get when we run <a href="https://github.com/kul-forbes/scs/blob/master/tests/matlab/cone_test.m">tests/matlab/cone_test.m</a>:</p>
+<div class="fragment"><div class="line">info1 = </div>
+<div class="line"></div>
+<div class="line">                      iter: 32</div>
+<div class="line">                    status: <span class="stringliteral">&#39;Solved&#39;</span></div>
+<div class="line">                      pobj: -16.3754</div>
+<div class="line">                      dobj: -16.3754</div>
+<div class="line">                    resPri: 6.7545e-12</div>
+<div class="line">                   resDual: 2.2441e-11</div>
+<div class="line">                 resInfeas: NaN</div>
+<div class="line">                  resUnbdd: 0.3220</div>
+<div class="line">                    relGap: 2.6977e-12</div>
+<div class="line">                 setupTime: 0.0507</div>
+<div class="line">                 solveTime: 1.2677</div>
+<div class="line">             progress_iter: [32x1 double]</div>
+<div class="line">           progress_relgap: [32x1 double]</div>
+<div class="line">           progress_respri: [32x1 double]</div>
+<div class="line">          progress_resdual: [32x1 double]</div>
+<div class="line">            progress_pcost: [32x1 double]</div>
+<div class="line">            progress_dcost: [32x1 double]</div>
+<div class="line">             progress_time: [32x1 double]</div>
+<div class="line">             progress_mode: [32x1 double]</div>
+<div class="line">               progress_ls: [32x1 double]</div>
+</div><!-- fragment --> </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jul 7 2017 00:56:52 for SuperSCS by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Jul 7 2017 05:10:32 for SuperSCS by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

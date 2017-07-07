@@ -25,10 +25,15 @@
       </df>
     </df>
     <logicalFolder name="pages" displayName="pages" projectFiles="true">
-      <itemPath>pages/dev_page.h</itemPath>
+      <itemPath>pages/basic_doc_page.h</itemPath>
+      <itemPath>pages/benchmarks_page.h</itemPath>
       <itemPath>pages/directions_page.h</itemPath>
+      <itemPath>pages/installation_page.h</itemPath>
+      <itemPath>pages/logging_page.h</itemPath>
       <itemPath>pages/mainpage.h</itemPath>
       <itemPath>pages/socp_page.h</itemPath>
+      <itemPath>pages/tuning_page.h</itemPath>
+      <itemPath>pages/warm_starting_page.h</itemPath>
     </logicalFolder>
     <logicalFolder name="scs" displayName="scs" projectFiles="true" root=".">
       <logicalFolder name="examples" displayName="examples" projectFiles="true">
@@ -81,7 +86,6 @@
       <itemPath>Makefile</itemPath>
       <itemPath>nbproject/private/launcher.properties</itemPath>
     </logicalFolder>
-    <itemPath>pages/benchmarks_page.h</itemPath>
   </logicalFolder>
   <sourceFolderFilter>^(nbproject)$</sourceFolderFilter>
   <sourceRootList>
@@ -224,15 +228,23 @@
         <cTool flags="0">
         </cTool>
       </item>
+      <item path="pages/basic_doc_page.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="pages/benchmarks_page.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="pages/dev_page.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="pages/directions_page.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="pages/installation_page.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="pages/logging_page.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="pages/mainpage.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="pages/socp_page.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="pages/tuning_page.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="pages/warm_starting_page.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/cones.c" ex="false" tool="0" flavor2="0">
         <cTool flags="0">
