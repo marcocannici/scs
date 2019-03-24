@@ -2,9 +2,9 @@ language: C
 sudo: required
 matrix:
     include:
-	- os: linux
-	  dist: xenial
-	  compiler: gcc
+        - os: linux
+          dist: xenial
+          compiler: gcc
           env:
             - SCS_RUN_COV=0
             - SCS_RUN_PYTHON=0
